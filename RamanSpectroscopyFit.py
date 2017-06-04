@@ -11,20 +11,25 @@ def double_Lorentz(x, a, b, A0, w0, x_0, A1, w1, x_1):
     return a*x+b+(2*A0/np.pi)*(w0/(4*(x-x_0)**2 + w0**2))+(2*A1/np.pi)*(w1/(4*(x-x_1)**2 + w1**2))
 
 
-# this will use DEAP to find initial parameter values
-def generate_Initial_Parameters():
+def generate_Initial_Parameters(xData, yData):
+    # min and max used for bounds
+    maxX = max(xData)
+    minX = min(xData)
+    maxY = max(yData)
+    minX = min(yData)
+        
     return [0.07, 79, 233240, 13.24, 1591.5, 68090.96, 15.55, 1566.9] # original values
-
 
 
 # load the pickled test data that wassaved from Raman spectroscopy
 [xData, yData] = pickle.load(open('data.pkl', 'rb'))
 
 # generate initial parameter values
-initialParameters = generate_Initial_Parameters()
+initialParameters = generate_Initial_Parameters(xData, yData)
 
 # curve fit the test data
 fittedParameters, niepewnosci = curve_fit(double_Lorentz, xData, yData, initialParameters)
+
 
 # create values for display of fitted peak function
 a, b, A, w, x_0, A1, w1, x_01 = fittedParameters
