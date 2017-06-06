@@ -14,7 +14,7 @@ def double_Lorentz(x, a, b, A, w, x_0, A1, w1, x_01):
 
 # function for genetic algorithm to minimize (sum of squared error)
 def sumOfSquaredError(parameterTuple):
-    return np.sum(yData - double_Lorentz(xData, *parameterTuple)) ** 2
+    return np.sum((yData - double_Lorentz(xData, *parameterTuple)) ** 2)
 
 
 def generate_Initial_Parameters():
