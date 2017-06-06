@@ -3,6 +3,7 @@ import pickle # for loading pickled test data
 import matplotlib
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import warnings
 
 from scipy.optimize import differential_evolution
 
@@ -14,6 +15,7 @@ def double_Lorentz(x, a, b, A, w, x_0, A1, w1, x_01):
 
 # function for genetic algorithm to minimize (sum of squared error)
 def sumOfSquaredError(parameterTuple):
+    warnings.filterwarnings("ignore") # do not print warnings by genetic algorithm
     return np.sum((yData - double_Lorentz(xData, *parameterTuple)) ** 2)
 
 
