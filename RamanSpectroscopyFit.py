@@ -9,11 +9,13 @@ from scipy.optimize import differential_evolution
 
 
 # Double Lorentzian peak function
+# bounds on parameters are set in generate_Initial_Parameters() below
 def double_Lorentz(x, a, b, A, w, x_0, A1, w1, x_01):
     return a*x+b+(2*A/np.pi)*(w/(4*(x-x_0)**2 + w**2))+(2*A1/np.pi)*(w1/(4*(x-x_01)**2 + w1**2))
 
 
 # function for genetic algorithm to minimize (sum of squared error)
+# bounds on parameters are set in generate_Initial_Parameters() below
 def sumOfSquaredError(parameterTuple):
     warnings.filterwarnings("ignore") # do not print warnings by genetic algorithm
     return np.sum((yData - double_Lorentz(xData, *parameterTuple)) ** 2)
